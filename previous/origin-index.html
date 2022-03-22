@@ -1,0 +1,56 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script scr=""></script>
+    <script type="text/babel">
+        function Btn({ text, fontSize = 16 }) {
+            return (
+                <div>
+                    <button
+                        style={{
+                            backgroundColor: 'tomato',
+                            color: 'white',
+                            padding: '10px 20px 10px 10px',
+                            margin: '10px',
+                            border: 0,
+                            borderRadius: 10,
+                            fontSize: fontSize,
+                        }}
+                    >
+                        {text}
+                    </button>
+                </div>
+            );
+        }
+        function Time() {
+            return <span>11</span>;
+        }
+
+        Btn.propTypes = {
+            text: PropTypes.string.isRequired,
+            fontSize: PropTypes.number.isRequired,
+        };
+        function App() {
+            return (
+                <div>
+                    <Btn text="Save Changes" fontSize={18} />
+                    <Btn text="Save" />
+                    <Btn text="Modify" />
+                    <Time />
+                </div>
+            );
+        }
+
+        const root = document.getElementById('root');
+        ReactDOM.render(<App />, root);
+    </script>
+</html>

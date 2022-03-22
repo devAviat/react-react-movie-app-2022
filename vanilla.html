@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <body>
-        <span>Total Clicks : 0</span>
+        <span id="span">Total Clicks : 0</span>
         <button id="btn">Click me</button>
     </body>
+
     <script>
-        let counter  = 0;
-        const button = document.getElementById("btn");
-        const span = document.querySelector("span");
-        function handelClick(){
-            console.log("i have been clicked");
-            counter = counter +1;
-            span.innerText = `Total Clicks : ${counter}`;
+        let counter = 0;
+        const button = document.querySelector('#btn');
+        const span = document.querySelector('#span');
+        function handelClick() {
+            counter = counter + 1;
+            console.log('i have been clicked');
+            span.innerHTML = `Total Clicks : ${counter}`;
         }
-        button.addEventListener("click", handelClick);
+        button.addEventListener('click', handelClick);
     </script>
+    <!--
+        1. create html
+        2. grab javascript
+        3. listen javascript
+        4. update data and html.
+    -->
 </html>
