@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="kr">
-    <body>
-        <div id="root"></div>
-    </body>
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel">
-        const root = document.getElementById('root');
-        const span = React.createElement(
-            'span',
-            { id: 'sexy-span', style: { color: 'red' } },
-            "Hello i'm span"
-        );
-        ReactDOM.render(span, root);
-    </script>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById('root');
+    const h3 = React.createElement(
+      'h3',
+      {
+        onMouseEnter: () => {
+          console.log('mouse enter');
+        },
+      },
+      "Hello i'm h3"
+    );
+    const btn = React.createElement(
+      'button',
+      {
+        id: 'btn',
+        onClick: () => {
+          console.log('im Clicked');
+        },
+      },
+      'Click me'
+    );
+    const div = React.createElement('div', null, [h3, btn]);
+    ReactDOM.render(div, root);
+  </script>
 </html>
-<!--React js : HTML을 직접 작성하지 않음 대신에 javascript를 이용할것임.
-    이 방법은 지양하는게 좋음. 
-    번거로울 뿐더러 지저분함. 더 편하고쉬운 방법이 있지만
-    우선 기본적으로 React가 어떻게 동작하는지 보고자 함.
-    현재 하고 있는건 절대 쓸일이 없을것임.
--->
+<!--
+
+    jsx property에 함수를 주입할수 있음.
+
+ -->
