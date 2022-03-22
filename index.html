@@ -8,40 +8,36 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById('root');
+    let counter = 0;
+    function counterUp() {
+      counter = counter + 1;
+      render();
+    }
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
 
-    const Title = () => {
-      return (
-        <h3
-          id='title'
-          onMouseEnter={() => {
-            console.log('mouse enter');
-          }}>
-          Hello im a title.
-        </h3>
-      );
-    };
-
-    const Button = () => (
-      <button
-        id='btn'
-        onClick={() => {
-          console.log('im clicked');
-        }}>
-        Click me!!
-      </button>
-    );
     const Container = () => (
       <div>
-        <Title />
-        <Button />
+        <h3>Total Clicks : {counter} </h3>
+        <button onClick={counterUp}>Click me!!</button>
       </div>
     );
-
-    ReactDOM.render(<Container />, root);
+    render();
   </script>
 </html>
 <!--
+counter 2가지 방식.
+그중 첫번째로 안좋은 방식을 먼저 이용해 보고 
+그 다음 베스트 방식을 이용해 보도록 하자.
 
+counter를 올리는 함수를 생각 해보자.
+JS로 했을때 counter를 grab하고 innerHTML했던것을 기업하는가?!
+JSX를 이요할땐 props에 event함수를 등록하고 
+렌더링 함수를 이용해서 click 할때마다 재 렌더링하게 만들어 봤다.
+이게 안좋은 방식.. 좀더 나은 방식이 있다.
 
+React에서 가장 좋은 점이라함은
+렌더링 할때 바뀐 요소만 변경해서 렌더링해준다.
 
  -->
