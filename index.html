@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="kr">
-    <body>
-        <div id="root"></div>
-    </body>
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel">
-        const root = document.getElementById('root');
-        const span = React.createElement(
-            'span',
-            { id: 'sexy-span', style: { color: 'red' } },
-            "Hello i'm span"
-        );
-        ReactDOM.render(span, root);
-    </script>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById('root');
+    let counter = 0;
+    function counterUp() {
+      counter = counter + 1;
+      render();
+    }
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
+
+    const Container = () => (
+      <div>
+        <h3>Total Clicks : {counter} </h3>
+        <button onClick={counterUp}>Click me!!</button>
+      </div>
+    );
+    render();
+  </script>
 </html>
+<<<<<<< HEAD
 <!--React js : HTML을 직접 작성하지 않음 대신에 javascript를 이용할것임.
     이 방법은 지양하는게 좋음. 
     번거로울 뿐더러 지저분함. 더 편하고쉬운 방법이 있지만
@@ -34,3 +45,20 @@
 
 
 -->
+=======
+<!--
+counter 2가지 방식.
+그중 첫번째로 안좋은 방식을 먼저 이용해 보고 
+그 다음 베스트 방식을 이용해 보도록 하자.
+
+counter를 올리는 함수를 생각 해보자.
+JS로 했을때 counter를 grab하고 innerHTML했던것을 기업하는가?!
+JSX를 이요할땐 props에 event함수를 등록하고 
+렌더링 함수를 이용해서 click 할때마다 재 렌더링하게 만들어 봤다.
+이게 안좋은 방식.. 좀더 나은 방식이 있다.
+
+React에서 가장 좋은 점이라함은
+렌더링 할때 바뀐 요소만 변경해서 렌더링해준다.
+
+ -->
+>>>>>>> 14b19329a08040e52829a5405ec836a043b53253
