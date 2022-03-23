@@ -8,32 +8,23 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         const root = document.getElementById('root');
-        function counterUp() {
-            counter = counter + 1;
-            render();
-        }
-        function render() {
-            ReactDOM.render(<App />, root);
-        }
-
         function App() {
-            const [counter, modifier] = React.useState(66, counterUp);
+            const [counter, setCounter] = React.useState(0);
+
+            const onClick = () => {
+                setCounter(counter + 1);
+            };
+
             return (
                 <div>
                     <h3>Total Clicks : {counter} </h3>
-                    <button>Click me!!</button>
+                    <button onClick={onClick}>Click me!!</button>
                 </div>
             );
         }
-        render();
+        ReactDOM.render(<App />, root);
     </script>
 </html>
 <!--
-렌더링을 새로 해도 전체를 재생성하는게 아니라
-바뀐 부분만 렌더링해줌.
-
-초기 컴포넌트가 초기 데이터를 가지고 렌더링 되고
-버튼을 클릭하면(event listener) 리렌더링되게 바꿔야 함.
-
 
  -->
