@@ -7,39 +7,44 @@
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        const root = document.getElementById('root');
         function App() {
-            const [counter, setCounter] = React.useState(0);
-
-            const onClick = () => {
-                //setCounter(counter + 1);
-                //setCounter((current) => current + 1);
-                setCounter((current) => current + 1);
+            const [minutes, setMinutes] = React.useState();
+            const onChange = (e) => {
+                setMinutes(e.target.value);
             };
             return (
                 <div>
-                    <h3>Total Clicks : {counter} </h3>
-                    <button onClick={onClick}>Click me!!</button>
+                    <h1 className="h1">Super Converter</h1>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input
+                        value={minutes}
+                        id="minutes"
+                        placeholder="Minutes"
+                        type="number"
+                        onChange={onChange}
+                    />
+                    <h4>You want to convert : {minutes}</h4>
+                    <label htmlFor="hours">Hours</label>
+                    <input id="hours" placeholder="Hours" type="number" />
                 </div>
             );
         }
+        const root = document.getElementById('root');
         ReactDOM.render(<App />, root);
     </script>
 </html>
 <!--
-현재 useState 베이스로 다음 state를 계산하고 싶다면
+*In  javascript
+for, class 
 
-함수로 전달하거나..
-setCounter((current) => current + 1);
-setCounter함수안에 함수를 넣을수 있는데
-함수의 첫번째 인수(argument)는 현재값 즉counter
-return 값은 to은 새로운 state가 된담..
+*JSX 
+HtmlFor , className
 
-현재 state 기반으로 다음 state를계산을 하고 싶으면 함수를 이용하면 됨.
-setCounter((current) => current + 1);
-
-1. 값을 직접 전달하거나
-2. 함수 현태로 정의해서 값을 전달하거나.
-
+useState는 Array(배열)를 제공하고 첫번째 element가 현재값이 됨.
+배열의 
+첫번째 인수는 현재 state값, 
+두번째 인수는 state함수 값.
+두번째 인수의 함수가 업데이트 될때(새로운 값이 들어올때)
+component를 업데이트(리렌더링해줌.)
 
  -->
