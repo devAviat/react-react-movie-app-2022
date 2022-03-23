@@ -12,10 +12,10 @@
             const [counter, setCounter] = React.useState(0);
 
             const onClick = () => {
-                setCounter(counter + 1);
+                //setCounter(counter + 1);
+                //setCounter((current) => current + 1);
+                setCounter((current) => current + 1);
             };
-            console.log('render');
-            console.log(counter);
             return (
                 <div>
                     <h3>Total Clicks : {counter} </h3>
@@ -27,7 +27,19 @@
     </script>
 </html>
 <!--
-데이터가 바뀔 때마다 컴포넌트를 리렌더링 함.
-! 즉 state가 바뀌면 Reactsms 컴포넌트를 리렌더링 함.
-* 리렌더링할때 바뀐 요소만 렌더링함.
+현재 useState 베이스로 다음 state를 계산하고 싶다면
+
+함수로 전달하거나..
+setCounter((current) => current + 1);
+setCounter함수안에 함수를 넣을수 있는데
+함수의 첫번째 인수(argument)는 현재값 즉counter
+return 값은 to은 새로운 state가 된담..
+
+현재 state 기반으로 다음 state를계산을 하고 싶으면 함수를 이용하면 됨.
+setCounter((current) => current + 1);
+
+1. 값을 직접 전달하거나
+2. 함수 현태로 정의해서 값을 전달하거나.
+
+
  -->
