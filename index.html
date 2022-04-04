@@ -7,38 +7,31 @@
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
+        function Btn({ text, changeValue }) {
+            console.log(text, 'was render');
+            return (
+                <button
+                    onClick={changeValue}
+                    style={{
+                        backgroundColor: 'tomato',
+                        color: 'white',
+                        padding: '10px 20px',
+                        border: 0,
+                        borderRadius: 10,
+                    }}
+                >
+                    {text}
+                </button>
+            );
+        }
+        const MemorizedBtn = React.memo(Btn);
         function App() {
-            const [minutes, setMinutes] = React.useState(0);
-            const onChange = (e) => {
-                setMinutes(e.target.value);
-            };
-            const reset = () => {
-                setMinutes(0);
-            };
+            const [value, setValue] = React.useState('Save Change');
+            const changeValue = () => setValue('Revert Change');
             return (
                 <div>
-                    <div>
-                        <h1 className="h1">Super Converter</h1>
-                        <label htmlFor="minutes">Minutes</label>
-                        <input
-                            value={minutes}
-                            id="minutes"
-                            placeholder="Minutes"
-                            type="number"
-                            onChange={onChange}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="hours">Hours</label>
-                        <input
-                            value={Math.round(minutes / 60)}
-                            id="hours"
-                            placeholder="Hours"
-                            type="number"
-                            disable
-                        />
-                    </div>
-                    <button onClick={reset}>Reset</button>
+                    <MemorizedBtn text={value} changeValue={changeValue} />
+                    <MemorizedBtn text="Continue" />
                 </div>
             );
         }
@@ -47,11 +40,18 @@
     </script>
 </html>
 <!--
-useState 결과는 array
-array 첫번째 인수(요소는) 데이터
-두번째 인수(요소)는 데이터를 수정하기 위한 함수.
+컴포넌트에 onclick를 넣으면 그건 이벤트 리스너가 아니고
+새로운 prop이다.
 
-event를 감지(listener)하는 요소 (onchange 이벤트)
-event가 발생했을때 값을 업데이터해주고 UI보여주는 요소.
-이 2개 가 전부 있어야 함.
+! 컴포넌트에 prop를 넣는다고 해당 컴포넌트 return에 자동으로 삽입 되지 않는다.
+! 반드시 후처리를 해줘야 한다.
+
+* React memorize.
+컴포넌트가 리렌더링하는것을 원치 않을때..
+컴포넌트를 재사용하면서 props값이 변하지 않을때가 있다.
+이때 props의 값이 변하지 않은 컴포넌트 까지 리렌더링 할 필요가 업다는 것이다.
+
+부모 컴포넌트에 state 값이 변경 됬다? -> 자식컴포넌트들은 전부 리렌더링됨.
+이게 싫으면 React.momo로 따로 관리 하면 됨.
+
  -->
