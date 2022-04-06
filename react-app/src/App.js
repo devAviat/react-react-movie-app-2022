@@ -2,54 +2,44 @@ import { useState, useEffect } from 'react';
 
 function App() {
     const [loading, setLoading] = useState(true);
-    const [coins, setCoins] = useState([]);
-    const [cost, setCost] = useState();
-    const [price, setPrice] = useState();
+    const [movies, setMoives] = useState([]);
+    const getMoives = async () => {
+        const json = await (
+            await fetch(
+                'https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year'
+            )
+        ).json();
+        setMoives(json.data.movies);
+        setLoading(false);
+    };
+
     useEffect(() => {
-        fetch('https://api.coinpaprika.com/v1/tickers?limit=4000')
-            .then((response) => response.json())
-            .then((json) => {
-                setCoins(json);
-                setLoading(false);
-                //console.log(json);
-            });
+        getMoives();
     }, []);
-
-    const inputCost = (event) => {
-        console.log(event.target.value);
-        setCost(event.target.value);
-    };
-
-    const selectBitCoins = (event) => {
-        setPrice(event.target.value);
-    };
-
+    console.log(movies);
     return (
         <div>
-            <h1>The Coins!({coins.length})</h1>
             {loading ? (
-                <strong>Loading...</strong>
+                <h1>Loading...</h1>
             ) : (
-                <select onChange={selectBitCoins}>
-                    <option>Choose Coins</option>
-                    {coins.map((item, index) => (
-                        <option key={index} value={item.quotes.USD.price}>
-                            {item.name} ({item.symbol}) :{' '}
-                            {item.quotes.USD.price})
-                        </option>
+                <div>
+                    {movies.map((movie, index) => (
+                        <div key={index}>
+                            <img
+                                src={movie.medium_cover_image}
+                                alt={movie.title_long}
+                            />
+                            <h2>{movie.title}</h2>
+                            <p>{movie.summary}</p>
+                            <ul>
+                                {movie.genres.map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
                     ))}
-                </select>
+                </div>
             )}
-            <h2>How much do you have money?</h2>
-            <input
-                type="number"
-                value={cost}
-                onChange={inputCost}
-                placeholder="Write your money"
-            />
-            <span>$</span>
-            <hr />
-            {!price ? 'not select coins' : <h2>{cost / price}</h2>}
         </div>
     );
 }
