@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 function Detail() {
+    console.log(2);
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [movieDetail, setMovieDetail] = useState();
